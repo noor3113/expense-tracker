@@ -57,7 +57,7 @@ export function SettingsMenu({
             <Download className="size-4" />
             Export data
           </DropdownMenuItem>
-          <DropdownMenuItem variant="destructive" onSelect={() => setConfirm(true)}>
+          <DropdownMenuItem className="text-destructive" onSelect={() => setConfirm(true)}>
             <Trash2 className="size-4" />
             Clear all data
           </DropdownMenuItem>
