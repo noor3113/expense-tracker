@@ -49,12 +49,14 @@ export function AddExpenseDialog({
       setError("Enter an amount greater than zero.");
       return;
     }
+    const trimmed = note.trim();
     onAdd({
       amount: Math.round(value * 100) / 100,
       category,
       date,
-      note: note.trim() || undefined,
+      ...(trimmed ? { note: trimmed } : {}),
     });
+
     toast.success(`${formatMoney(value)} added to ${category}`);
     reset();
     setOpen(false);
