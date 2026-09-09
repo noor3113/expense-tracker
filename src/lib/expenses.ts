@@ -35,8 +35,13 @@ export function todayISO(): string {
   return `${d.getFullYear()}-${m}-${day}`;
 }
 
+function parseKey(key: string): [number, number] {
+  const parts = key.split("-");
+  return [Number(parts[0] ?? 0), Number(parts[1] ?? 1)];
+}
+
 export function shiftMonth(key: string, delta: number): string {
-  const [y, m] = key.split("-").map(Number);
+  const [y, m] = parseKey(key);
   const total = y * 12 + (m - 1) + delta;
   const ny = Math.floor(total / 12);
   const nm = total % 12;
@@ -44,7 +49,7 @@ export function shiftMonth(key: string, delta: number): string {
 }
 
 export function monthLabel(key: string): string {
-  const [y, m] = key.split("-").map(Number);
+  const [y, m] = parseKey(key);
   return new Date(y, m - 1, 1).toLocaleDateString(undefined, {
     month: "long",
     year: "numeric",
@@ -52,7 +57,7 @@ export function monthLabel(key: string): string {
 }
 
 export function daysInMonth(key: string): number {
-  const [y, m] = key.split("-").map(Number);
+  const [y, m] = parseKey(key);
   return new Date(y, m, 0).getDate();
 }
 
@@ -87,7 +92,8 @@ export function dailyTotals(list: Expense[], key: string): { day: number; amount
   const out = Array.from({ length: n }, (_, i) => ({ day: i + 1, amount: 0 }));
   for (const e of list) {
     const d = Number(e.date.slice(8, 10));
-    if (d >= 1 && d <= n) out[d - 1].amount += e.amount;
+    const slot = out[d - 1];
+    if (slot) slot.amount += e.amount;
   }
   return out;
 }
@@ -119,7 +125,7 @@ export function buildInsights(all: Expense[], key: string, now = todayISO()): In
   }
 
   const curCats = categoryTotals(cur);
-  const top = curCats[0];
+  const top = curCats[0]!;
   insights.push({
     id: "top",
     text: `You've spent the most on ${top.category} this month — ${formatMoney(top.amount)} (${Math.round(
@@ -184,7 +190,7 @@ export function buildInsights(all: Expense[], key: string, now = todayISO()): In
   }
 
   // biggest single expense
-  const largest = [...cur].sort((a, b) => b.amount - a.amount)[0];
+  const largest = [...cur].sort((a, b) => b.amount - a.amount)[0]!;
   if (cur.length >= 3) {
     insights.push({
       id: "largest",
