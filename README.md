@@ -39,7 +39,14 @@ The application organizes spending data and presents it through clear summaries,
 
 ## Screenshots
 
-Screenshots of the application can be added here to showcase the dashboard, expense entry form, spending charts, and monthly overview.
+### Home Screen
+![Home Screen](screenshots/Home%20screen.png)
+
+### Expense Tracker
+![Expense Tracker](screenshots/Expense%20tracker.png)
+
+### Add Expense
+![Add Expense](screenshots/Add%20Expense.png)
 
 ## Purpose
 
