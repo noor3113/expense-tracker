@@ -59,34 +59,6 @@ This project was developed as a portfolio project to demonstrate modern web deve
 * Node.js
 * npm
 
-### Installation
-
-Clone the repository and install the required dependencies:
-
-```bash
-git clone https://github.com/noor3113/expense-tracker.git
-cd expense-tracker
-npm install
-```
-
-### Run the Application
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-The application will then be available at the local development URL provided by Vite.
-
-## Build
-
-To create a production build:
-
-```bash
-npm run build
-```
-
 ## Author
 
 **Noor ul Huda**
